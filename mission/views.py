@@ -29,3 +29,9 @@ class TaskDeleteView(generic.DeleteView):
 class TagListView(generic.ListView):
     model = Task
     paginate_by = 10
+
+
+class TagCreateView(generic.CreateView):
+    model = Task
+    fields = "__all__"
+    success_url = reverse_lazy("mission:tag_list")
