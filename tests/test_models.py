@@ -21,3 +21,20 @@ class TaskTest(TestCase):
         )
         self.assertEqual(str(task),
                          f"{task.content} - {task.created_date} - {task.is_completed}")
+
+    def test_task_ordering_by_is_completed(self):
+        Task.objects.create(
+            content="load the dishwasher",
+            is_completed=False,
+        )
+        Task.objects.create(
+            content="clean microwave",
+            is_completed=True
+        )
+        Task.objects.create(
+            content="vacuuming",
+            is_completed=False
+        )
+        all_tasks = Task.objects.all()
+        self.assertEqual(all_tasks[0].content, "load the dishwasher")
+        self.assertEqual(all_tasks[1].content, "vacuuming")
