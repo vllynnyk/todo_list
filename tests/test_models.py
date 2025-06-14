@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from mission.models import Task
+from mission.models import Task, Tag
 
 
 class TaskTest(TestCase):
@@ -38,3 +38,13 @@ class TaskTest(TestCase):
         all_tasks = Task.objects.all()
         self.assertEqual(all_tasks[0].content, "load the dishwasher")
         self.assertEqual(all_tasks[1].content, "vacuuming")
+
+
+class TagTest(TestCase):
+
+    def test_tag_str(self):
+        tag = Tag.objects.create(
+            name="home",
+        )
+        self.assertEqual(str(tag),
+                         f"{tag.name}")
