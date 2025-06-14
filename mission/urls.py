@@ -5,7 +5,10 @@ from mission.views import (
     TaskCreateView,
     TaskUpdateView,
     TaskDeleteView,
-    TagListView
+    TagListView,
+    TagCreateView,
+    TagUpdateView,
+    TagDeleteView
 )
 
 
@@ -32,5 +35,20 @@ urlpatterns = [
         "tags/",
         TagListView.as_view(),
         name="tag_list"
+    ),
+    path(
+        "tag/create/",
+        TagCreateView.as_view(),
+        name="tag_create"
+    ),
+    path(
+        "tag/<int:pk>/update/",
+        TagUpdateView.as_view(),
+        name="tag_update"
+    ),
+    path(
+        "tag/<int:pk>/delete/",
+        TagDeleteView.as_view(),
+        name="tag_delete"
     ),
 ]
