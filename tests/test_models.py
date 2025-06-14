@@ -48,3 +48,10 @@ class TagTest(TestCase):
         )
         self.assertEqual(str(tag),
                          f"{tag.name}")
+
+    def test_tag_ordering(self):
+
+        Tag.objects.create(name="home")
+        Tag.objects.create(name="work")
+        all_tags = list(Tag.objects.all())
+        self.assertEqual(all_tags[0]. name, "home")
