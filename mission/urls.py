@@ -8,7 +8,8 @@ from mission.views import (
     TagListView,
     TagCreateView,
     TagUpdateView,
-    TagDeleteView
+    TagDeleteView,
+    confirm_completed_status
 )
 
 
@@ -30,6 +31,11 @@ urlpatterns = [
         "<int:pk>/delete/",
         TaskDeleteView.as_view(),
         name="task_delete"
+    ),
+    path(
+        "<int:pk>/confirm-status/",
+        confirm_completed_status,
+        name="confirm_status",
     ),
     path(
         "tags/",
