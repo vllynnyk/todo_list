@@ -37,7 +37,11 @@
       {% endif %}
       </p>
 
-      <p>Tags: {{ task.tags }}</p>
+      <p>Tags:
+        {% for tag in task.tags.all %}
+          {{ tag.name }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+      </p>
 
       <a href="{% url 'mission:task_update' task.pk %}" class="btn btn-sm btn-outline-primary mt-2">Update</a>
       <a href="{% url 'mission:task_delete' task.pk %}" class="btn btn-sm btn-outline-danger mt-2">Delete</a>
