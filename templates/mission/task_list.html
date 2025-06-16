@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1>
+    Todo list
+    <a href="{% url 'mission:task_create' %}" class="btn btn-primary link-to-page">
+      Add task
+    </a>
+  </h1>
+
+  {% if task_list %}
+  <ul>
+    {% for task in task_list %}
+     <li class="mb-4 p-3 border rounded">
+      <h3>
+        {{ task.content }}
+
+        {% if task.is_completed %}
+          <strong class="text-success">Done</strong>
+          <a href="{% url 'mission:confirm_status' pk=task.id %}" class="btn btn-secondary link-to-page">
+            Undo
+          </a>
+        {% else %}
+          <strong class="text-danger">Not Done</strong>
+          <a href="{% url 'mission:confirm_status' pk=task.id %}" class="btn btn-success link-to-page">
+            Complete
+          </a>
+        {% endif %}
+
+      </h3>
+
+      <p>Created: {{ task.created_date }}
+
+      {% if task.deadline %}
+        <span style="color: #920101;">Deadline: {{ task.deadline }}</span>
+      {% endif %}
+      </p>
+
+      <p>Tags:
+        {% for tag in task.tags.all %}
+          {{ tag.name }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+      </p>
+
+      <a href="{% url 'mission:task_update' task.pk %}" class="btn btn-sm btn-outline-primary mt-2">Update</a>
+      <a href="{% url 'mission:task_delete' task.pk %}" class="btn btn-sm btn-outline-danger mt-2">Delete</a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no tasks</p>
+  {% endif %}
+
+{% endblock %}
